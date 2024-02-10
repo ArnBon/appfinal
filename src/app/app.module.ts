@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 
-import { AppRoutingModule } from './app-routing.module';
+import { environment } from 'environments/environment';
+
 import { AppComponent } from './app.component';
-import { CabeceroComponent } from './componentes/cabecero/cabecero.component';
-import { TableroComponent } from './componentes/tablero/tablero.component';
-import { ClientesComponent } from './componentes/clientes/clientes.component';
-import { EditarClienteComponent } from './componentes/editar-cliente/editar-cliente.component';
+import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './componentes/login/login.component';
+import { TableroComponent } from './componentes/tablero/tablero.component';
+import { CabeceroComponent } from './componentes/cabecero/cabecero.component';
+import { ClientesComponent } from './componentes/clientes/clientes.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
-import { ConfiguracionComponent } from './componentes/configuracion/configuracion.component';
-import { NoEncontradoComponent } from './componentes/no-encontrado/no-encontrado.component';
 import { PiePaginaComponent } from './componentes/pie-pagina/pie-pagina.component';
+import { NoEncontradoComponent } from './componentes/no-encontrado/no-encontrado.component';
+import { ConfiguracionComponent } from './componentes/configuracion/configuracion.component';
+import { EditarClienteComponent } from './componentes/editar-cliente/editar-cliente.component';
+
 
 @NgModule({
   declarations: [
@@ -27,8 +33,11 @@ import { PiePaginaComponent } from './componentes/pie-pagina/pie-pagina.componen
     PiePaginaComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    provideFirebaseApp(() => initializeApp( environment.firestore, 'control-clientes' )),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]
