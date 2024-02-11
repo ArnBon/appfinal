@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -17,6 +17,7 @@ import { PiePaginaComponent } from './componentes/pie-pagina/pie-pagina.componen
 import { NoEncontradoComponent } from './componentes/no-encontrado/no-encontrado.component';
 import { ConfiguracionComponent } from './componentes/configuracion/configuracion.component';
 import { EditarClienteComponent } from './componentes/editar-cliente/editar-cliente.component';
+import { ClienteServicio } from './servicios/cliente.service';
 
 
 @NgModule({
@@ -38,8 +39,11 @@ import { EditarClienteComponent } from './componentes/editar-cliente/editar-clie
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp( environment.firestore, 'control-clientes' )),
     provideFirestore(() => getFirestore()),
+
   ],
-  providers: [],
+  providers: [
+    ClienteServicio,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
